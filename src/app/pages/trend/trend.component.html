@@ -1,0 +1,172 @@
+<div class=" header pb-6">
+  <div class=" container-fluid">
+    <div class=" header-body">
+      <div class=" row align-items-center py-4">
+        <div class=" col-lg-6 col-7">
+          <b>Today is {{now | date:'medium' }}</b>
+        </div>
+      </div>
+      <div class="card-header" style="text-align: center;">
+        Current Month Fraudulent Activity
+      </div>
+      <div class=" row"> 
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card card-stats" style="height: 70px;">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5 class=" card-title text-uppercase text-muted mb-0">
+                    Fraud Customers
+                  </h5>
+                </div>
+
+                <div class=" col">
+                  <span class=" h2 font-weight-bold mb-0"> 279 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5 class=" card-title text-uppercase text-muted mb-0">
+                    Active Customers
+                  </h5>
+                </div>
+
+                <div class=" col">
+                  <span class=" h4 font-weight-bold mb-0" style="color: red;"> 4.8% </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5 class=" card-title text-uppercase text-muted mb-0">
+                    Growth of Fraud Activity
+                  </h5>
+                </div>
+
+                <div class=" col-auto">
+                  <span class=" h2 font-weight-bold mb-0" style="color: red;"> 8% </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5 class=" card-title text-uppercase text-muted mb-0">
+                    Loss
+                  </h5>
+                </div>
+
+                <div class=" col">
+                  <span class=" h2 font-weight-bold mb-0"> $6,150.42 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>     
+    </div>
+  </div>
+</div>
+
+<div class=" container-fluid mt--6">
+  <div class=" row">
+    <div class=" col-xl-12">
+      <div class=" card">
+        <div class=" card-body">
+          <div class="chart" id="chartdiv13">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-12"><h5 class=" h3 mb-0">Number of Fraud Cases By Age Range & Gender</h5></div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv14">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-12"><h5 class=" h3 mb-0">Number of Fraud Cases By Devices</h5></div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv15">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-12"><h5 class=" h3 mb-0">Number of Fraud Cases By Payment Method</h5></div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv16">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-12"><h5 class=" h3 mb-0">Number of Fraud Cases By States</h5></div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv17">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col-xl-12">
+      <div class=" card">      
+        <div class="map-container">
+          <div class="map-frame">
+            <div id="map" style="height:500px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

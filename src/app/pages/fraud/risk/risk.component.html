@@ -1,0 +1,501 @@
+<div class=" header pb-6">
+  <div class=" container-fluid">
+    <div class=" header-body">
+      <div class=" row align-items-center py-4">
+        <div class=" col-lg-6 col-7">
+          <b>Today is {{now | date:'medium' }}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class=" container-fluid mt--6">
+  <div class=" row">
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-auto"><h5 class=" h3 mb-0">Obligations By Rating</h5></div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv11">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-around;">
+            <div class="col-auto"><h5 class=" h3 mb-0">RISK SCORE</h5></div>
+            <div class="col-auto"><h5 class=" h3 mb-0">RECOVERY TIME</h5></div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="chart" id="chartdiv12">
+              </div>
+            </div>
+            <div class="col-6">
+              <h5>FRAUD AVERAGE TIME</h5>
+              <h2><i class='far fa-clock'></i><span style="color:red;">5H 15MIN</span></h2><br>
+              <h5>FRAUD MEDIAN TIME</h5>
+              <h2><i class='far fa-clock'></i><span style="color:red;">4H 18MIN</span></h2><br>
+              <select name="day" id="day">
+                <option value="">Last 2 days</option>
+                <option value="">Last 3 days</option>
+                <option value="">Last 4 days</option>
+              </select>             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col">
+      <div class=" card">
+        <div class=" card-header">
+          <h3 class=" mb-0">Fraudulent Rules</h3><br>
+          <tabset>
+            <tab heading="Past" id="tab1">
+              <div class="dataTables_wrapper py-4">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="datatable_length">
+                      <label>
+                        Show
+                        <select
+                          name="datatable_length"
+                          aria-controls="datatable"
+                          class="form-control form-control-sm"
+                          (change)="entriesChange($event)"
+                        >
+                          <option value="5" [selected]="entries == 5">5</option>
+                          <option value="25" [selected]="entries == 25">25</option>
+                          <option value="50" [selected]="entries == 50">50</option>
+                          <option value="-1" [selected]="entries == -1">All</option>
+                        </select>
+                        Records
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                    <div id="datatable_filter" class="dataTables_filter">
+                      <label>
+                        <input
+                          type="search"
+                          class="form-control form-control-sm"
+                          placeholder="Search records"
+                          aria-controls="datatable"
+                          (keyup)="filterTable($event)"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                </div>
+      
+                <ngx-datatable
+                  class="bootstrap selection-cell"
+                  [columnMode]="'force'"
+                  [headerHeight]="50"
+                  [footerHeight]="50"
+                  [rowHeight]="'auto'"
+                  [limit]="entries != -1 ? entries : undefined"
+                  [rows]="temp"
+                  (activate)="onActivate($event)"
+                >
+                <ngx-datatable-column name="no"></ngx-datatable-column>
+                  <ngx-datatable-column name="rule"></ngx-datatable-column>
+                  <ngx-datatable-column name="description"></ngx-datatable-column>
+                  <ngx-datatable-column name="datecreated"></ngx-datatable-column>
+                  <ngx-datatable-column name="datepublished"></ngx-datatable-column>
+                  <ngx-datatable-column name="action">
+                    <ng-template ngx-datatable-cell-template let-value="value">
+                      <div>
+                        <a
+                          class="table-action"
+                          tooltip="Edit"
+                          placement="top"
+                          data-target="#modal-default"
+                          data-toggle="modal"
+                          (click)="openDefaultModal(modalDefault)"
+                        >
+                          <i class=" fas fa-eye"> </i>
+                        </a>
+      
+                        <a
+                          class="table-action"
+                          tooltip="Delete"
+                          placement="top"
+                        >
+                          <i class=" fas fa-trash"> </i>
+                        </a>
+                        
+                        <ng-template #modalDefault>
+                          <div class=" modal-header">
+                            <h6 class=" modal-title" id="modal-title-default">
+                              Form
+                            </h6>
+          
+                            <button
+                              aria-label="Close"
+                              class=" close"
+                              data-dismiss="modal"
+                              type="button"
+                              (click)="defaultModal.hide()"
+                            >
+                              <span aria-hidden="true"> × </span>
+                            </button>
+                          </div>
+          
+                          <div class=" modal-body">
+                            <div class="row">
+                              <div class="col-12">
+                                <label
+                                  class=" form-control-label"
+                                  for="exampleFormControlTextarea1"
+                                >
+                                  Rule Name
+                                </label>
+                                <input
+                                  class="form-control mb-2"
+                                  placeholder=""
+                                  type="text"
+                                />
+                              </div>
+                            </div>
+                            <div class="row">                        
+                              <div class="col-12">
+                                <label
+                                  class=" form-control-label"
+                                  for="exampleFormControlTextarea1"
+                                >
+                                  Description
+                                </label>
+                                <select class=" form-control mb-2" id="exampleFormControlSelect3">
+                                  <option>Cash eq deposits profile deviation</option>         
+                                  <option> Excessive short period ATM withdrawals </option>
+                                  <option> Excessive Month ATM withdrawals </option>
+                                  <option> Frequent Card repayments </option>
+                                  <option> Excessive long period ATM withdrawals </option>
+                                  <option> Multiple short period merchant transaction </option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-12">
+                                <label
+                                  class=" form-control-label"
+                                  for="exampleFormControlTextarea1"
+                                >
+                                  Date
+                                </label>
+                                <input
+                                  class="form-control mb-2"
+                                  placeholder=""
+                                  type="date"
+                                />
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-12">
+                                <label
+                                  class=" form-control-label"
+                                  for="exampleFormControlTextarea1"
+                                >
+                                  Date
+                                </label>
+                                <input
+                                  class="form-control mb-2"
+                                  placeholder=""
+                                  type="date"
+                                />
+                              </div>
+                            </div>
+                          </div>
+          
+                          <div class=" modal-footer" style="justify-content: end;">
+                            <button class=" btn btn-danger" type="button">
+                              Cancel
+                            </button>
+          
+                            <button
+                              class=" btn btn-success"
+                              data-dismiss="modal"
+                              type="button"
+                              (click)="defaultModal.hide()"
+                            >
+                              Save
+                            </button>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+                
+              </div>
+            </tab>
+            <tab heading="Current">Content Current</tab>
+            <tab heading="Future">Content Future</tab>
+          </tabset>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col">
+      <div class=" card">
+        <div class=" card-header border-0">
+          <h3 class=" mb-0">Set Risk</h3>
+        </div>
+
+        <div class=" table-responsive" id="first-list">
+          <table class=" table align-items-center table-flush">
+            <thead class=" thead-light">
+              <tr>
+                <th class=" sort" data-sort="no" scope="col">No</th>
+                <th class=" sort" data-sort="risk" scope="col">Risk Level</th>
+                <th class=" sort" data-sort="created" scope="col">Date Created</th>
+                <th class=" sort" data-sort="reviewed" scope="col">Date Reviewed</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+
+            <tbody class=" list">
+              <tr>
+                <td>1</td>
+                <td>Insignificant</td>
+                <td>2/2/2020</td>
+                <td>3/3/2020</td>
+                <td>
+                  <div>
+                    <a
+                      class="table-action"
+                      tooltip="Edit"
+                      placement="top"
+                      data-target="#modal-default"
+                      data-toggle="modal"
+                      (click)="openDefaultModal2(modalDefault2)"
+                    >
+                      <i class=" fas fa-eye"> </i>
+                    </a>
+  
+                    <a
+                      class="table-action"
+                      tooltip="Delete"
+                      placement="top"
+                    >
+                      <i class=" fas fa-trash"> </i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Major</td>
+                <td>21/2/2020</td>
+                <td>4/6/2020</td>
+                <td>
+                  <div>
+                    <a
+                      class="table-action"
+                      tooltip="Edit"
+                      placement="top"
+                      data-target="#modal-default"
+                      data-toggle="modal"
+                      (click)="openDefaultModal2(modalDefault2)"
+                    >
+                      <i class=" fas fa-eye"> </i>
+                    </a>
+  
+                    <a
+                      class="table-action"
+                      tooltip="Delete"
+                      placement="top"
+                    >
+                      <i class=" fas fa-trash"> </i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Moderate</td>
+                <td>5/5/2020</td>
+                <td>9/6/2020</td>
+                <td>
+                  <div>
+                    <a
+                      class="table-action"
+                      tooltip="Edit"
+                      placement="top"
+                      data-target="#modal-default"
+                      data-toggle="modal"
+                      (click)="openDefaultModal2(modalDefault2)"
+                    >
+                      <i class=" fas fa-eye"> </i>
+                    </a>
+  
+                    <a
+                      class="table-action"
+                      tooltip="Delete"
+                      placement="top"
+                    >
+                      <i class=" fas fa-trash"> </i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Minor</td>
+                <td>23/5/2020</td>
+                <td>6/9/2020</td>
+                <td>
+                  <div>
+                    <a
+                      class="table-action"
+                      tooltip="Edit"
+                      placement="top"
+                      data-target="#modal-default"
+                      data-toggle="modal"
+                      (click)="openDefaultModal2(modalDefault2)"
+                    >
+                      <i class=" fas fa-eye"> </i>
+                    </a>
+  
+                    <a
+                      class="table-action"
+                      tooltip="Delete"
+                      placement="top"
+                    >
+                      <i class=" fas fa-trash"> </i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Extreme</td>
+                <td>4/8/2020</td>
+                <td>2/1/2020</td>
+                <td>
+                  <div>
+                    <a
+                      class="table-action"
+                      tooltip="Edit"
+                      placement="top"
+                      data-target="#modal-default"
+                      data-toggle="modal"
+                      (click)="openDefaultModal2(modalDefault2)"
+                    >
+                      <i class=" fas fa-eye"> </i>
+                    </a>
+  
+                    <a
+                      class="table-action"
+                      tooltip="Delete"
+                      placement="top"
+                    >
+                      <i class=" fas fa-trash"> </i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ng-template #modalDefault2>
+            <div class=" modal-header">
+              <h6 class=" modal-title" id="modal-title-default">
+                Form
+              </h6>
+
+              <button
+                aria-label="Close"
+                class=" close"
+                data-dismiss="modal"
+                type="button"
+                (click)="defaultModal.hide()"
+              >
+                <span aria-hidden="true"> × </span>
+              </button>
+            </div>
+
+            <div class=" modal-body">
+              <div class="row">                        
+                <div class="col-12">
+                  <label
+                    class=" form-control-label"
+                    for="exampleFormControlTextarea1"
+                  >
+                    Risk Level
+                  </label>
+                  <select class=" form-control mb-2" id="exampleFormControlSelect3">
+                    <option>Insignificant</option>         
+                    <option>Minor</option>
+                    <option> Moderate</option>
+                    <option> Major</option>
+                    <option> Extreme</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <label
+                    class=" form-control-label"
+                    for="exampleFormControlTextarea1"
+                  >
+                    Date Created
+                  </label>
+                  <input
+                    class="form-control mb-2"
+                    placeholder=""
+                    type="date"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <label
+                    class=" form-control-label"
+                    for="exampleFormControlTextarea1"
+                  >
+                    Date Reviewed
+                  </label>
+                  <input
+                    class="form-control mb-2"
+                    placeholder=""
+                    type="date"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class=" modal-footer" style="justify-content: end;">
+              <button class=" btn btn-danger" type="button">
+                Cancel
+              </button>
+
+              <button
+                class=" btn btn-success"
+                data-dismiss="modal"
+                type="button"
+                (click)="defaultModal2.hide()"
+              >
+                Save
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+</div>
+

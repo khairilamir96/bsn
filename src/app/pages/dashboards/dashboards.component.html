@@ -1,0 +1,229 @@
+<div class=" header pb-6">
+  <div class=" container-fluid">
+    <div class=" header-body">
+      <div class=" row align-items-center py-4">
+        <div class=" col-lg-6 col-7">
+          <b>Today is {{now | date:'medium' }}</b>
+        </div>
+      </div>
+      <div class="card-header" style="text-align: center;">
+        HOURLY TRENDS
+      </div>
+      <div class=" row"> 
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card card-stats" style="height: 70px;">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5 class=" card-title text-uppercase text-muted mb-0">
+                    INVESTIGATION
+                  </h5>
+                </div>
+
+                <div class=" col">
+                  <span class=" h2 font-weight-bold mb-0" style="color: orangered;"> 12 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5 class=" card-title text-uppercase text-muted mb-0">
+                    KFI ADMINISTRATION
+                  </h5>
+                </div>
+
+                <div class=" col">
+                  <span class=" h4 font-weight-bold mb-0" style="color: orangered;"> 04/11 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5 class=" card-title text-uppercase text-muted mb-0">
+                    QUEUE TRANSACTION
+                  </h5>
+                </div>
+
+                <div class=" col-auto">
+                  <span class=" h2 font-weight-bold mb-0" style="color: orangered;"> 924 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-xl-3 col-md-6">
+          <div class=" card card-stats">
+            <div class=" card-body">
+              <div class=" row">
+                <div class=" col">
+                  <h5 class=" card-title text-uppercase text-muted mb-0">
+                    SUCCESSFUL PAYMENTS
+                  </h5>
+                </div>
+
+                <div class=" col">
+                  <span class=" h2 font-weight-bold mb-0" style="color: green;"> 85 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>     
+    </div>
+  </div>
+</div>
+
+<div class=" container-fluid mt--6">
+  <div class=" row">
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-auto"><h5 class=" h3 mb-0">Total Transactions</h5></div>
+            <div class="col-auto">
+              <h5 class=" h4 mb-0">
+                <a href="javascript:void()">DAY | </a>
+                <a href="javascript:void()">WEEK | </a>
+                <a href="javascript:void()">MONTH | </a>
+                <a href="javascript:void()">YEAR</a>
+              </h5>
+            </div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-6"><h5 class=" h3 mb-0">Total Successful Transactions</h5></div>
+            <div class="col-auto">
+              <h5 class=" h4 mb-0">
+                <a href="javascript:void()">DAY | </a>
+                <a href="javascript:void()">WEEK | </a>
+                <a href="javascript:void()">MONTH | </a>
+                <a href="javascript:void()">YEAR</a>
+              </h5>
+            </div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv1">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-6"><h5 class=" h3 mb-0">Total Fraud Transactions</h5></div>
+            <div class="col-auto">
+              <h5 class=" h4 mb-0">
+                <a href="javascript:void()">DAY | </a>
+                <a href="javascript:void()">WEEK | </a>
+                <a href="javascript:void()">MONTH | </a>
+                <a href="javascript:void()">YEAR</a>
+              </h5>
+            </div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv2">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-6"><h5 class=" h3 mb-0">Total In-Review Transactions</h5></div>
+            <div class="col-auto">
+              <h5 class=" h4 mb-0">
+                <a href="javascript:void()">DAY | </a>
+                <a href="javascript:void()">WEEK | </a>
+                <a href="javascript:void()">MONTH | </a>
+                <a href="javascript:void()">YEAR</a>
+              </h5>
+            </div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-6"><h5 class=" h3 mb-0">Total Failed Transactions</h5></div>
+            <div class="col-auto">
+              <h5 class=" h4 mb-0">
+                <a href="javascript:void()">DAY | </a>
+                <a href="javascript:void()">WEEK | </a>
+                <a href="javascript:void()">MONTH | </a>
+                <a href="javascript:void()">YEAR</a>
+              </h5>
+            </div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv4">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class=" col-xl-6">
+      <div class=" card">
+        <div class=" card-header">
+          <div class="row" style="justify-content: space-between;">
+            <div class="col-6"><h5 class=" h3 mb-0">Acceptance Ratio Trend</h5></div>
+            <div class="col-auto">
+              <h5 class=" h4 mb-0">
+                <a href="javascript:void()">DAY | </a>
+                <a href="javascript:void()">WEEK | </a>
+                <a href="javascript:void()">MONTH | </a>
+                <a href="javascript:void()">YEAR</a>
+              </h5>
+            </div>
+          </div>
+        </div>
+        
+        <div class=" card-body">
+          <div class="chart" id="chartdiv5">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
